@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آکادمی هوش مصنوعی و فناوری‌های نو | استاد عرفان غیبی</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a0e1a;
+            --secondary: #141b2d;
+            --accent: #ff5e94;
+            --accent2: #42e9f5;
+            --accent3: #ffda57;
+            --accent4: #9b5de5;
+            --text: #f0f6ff;
+            --text-secondary: #c1d3f0;
+            --card: rgba(25, 30, 48, 0.9);
+            --transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glass: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background-attachment: fixed;
+            direction: rtl;
+            text-align: right;
+            zoom: 90%;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 94, 148, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 90% 80%, rgba(66, 233, 245, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 30% 60%, rgba(155, 93, 229, 0.3) 0%, transparent 30%),
+                radial-gradient(circle at 70% 30%, rgba(255, 218, 87, 0.25) 0%, transparent 30%);
+            z-index: -2;
+            animation: gradientShift 30s infinite alternate ease-in-out;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 2rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 1.2rem 0;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 900;
+            background: linear-gradient(to right, var(--accent2), var(--accent4), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(66, 233, 245, 0.5);
+            transition: var(--transition);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 4rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            position: relative;
+            transition: var(--transition);
+            padding: 0.8rem 0;
+            letter-spacing: 1.8px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            transition: var(--transition);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent2);
+            text-shadow: 0 0 20px rgba(66, 233, 245, 0.6);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-btn {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-btn:hover {
+            background: var(--accent2);
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 22rem 0 15rem;
+            display: flex;
+            align-items: center;
+            gap: 10rem;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .hero-content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .hero h4 {
+            color: var(--accent2);
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            animation: fadeInDown 1.5s ease;
+            text-shadow: 0 0 25px rgba(66, 233, 245, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 7rem;
+            line-height: 1.05;
+            margin-bottom: 3rem;
+            background: linear-gradient(to right, var(--text), var(--accent2), var(--accent3), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1.5s ease;
+        }
+        
+        .hero h1 span {
+            display: block;
+            font-size: 5rem;
+            color: var(--accent3);
+            margin-top: 1rem;
+            text-shadow: 0 0 30px rgba(255, 218, 87, 0.7);
+        }
+
+        .hero p {
+            font-size: 2.2rem;
+            color: var(--text-secondary);
+            max-width: 850px;
+            margin-bottom: 5rem;
+            animation: fadeIn 2s ease;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 3.5rem;
+            animation: fadeInUp 2.5s ease;
+        }
+
+        .btn {
+            padding: 1.8rem 4.5rem;
+            border-radius: 70px;
+            font-weight: 800;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            letter-spacing: 2.5px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent2), var(--accent));
+            z-index: -1;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: transparent;
+            color: var(--text);
+            border: 3px solid transparent;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-20px) scale(1.1);
+            box-shadow: 0 35px 70px rgba(66, 233, 245, 0.75);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 3px solid var(--accent2);
+        }
+
+        .btn-secondary::before {
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(66, 233, 245, 0.2);
+            box-shadow: 0 35px 70px rgba(66, 233, 245, 0.65);
+            transform: translateY(-20px) scale(1.1);
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            perspective: 1600px;
+        }
+
+        .ai-container {
+            position: relative;
+            width: 100%;
+            height: 750px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform-style: preserve-3d;
+            animation: float3D 15s infinite alternate ease-in-out;
+        }
+
+        .ai-animation {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(66, 233, 245, 0.4) 0%, rgba(66, 233, 245, 0) 70%);
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulseGlow 12s infinite alternate;
+            box-shadow: 0 0 220px rgba(66, 233, 245, 0.6);
+        }
+
+        .ai-icon {
+            font-size: 28rem;
+            color: var(--accent2);
+            opacity: 0.5;
+            position: absolute;
+            animation: float 12s ease-in-out infinite;
+            filter: drop-shadow(0 0 50px rgba(66, 233, 245, 0.9));
+        }
+
+        .ai-highlight {
+            position: absolute;
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 2.5rem;
+            text-align: center;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7);
+            transition: var(--transition);
+            animation: popIn 1.5s ease;
+            z-index: 3;
+        }
+
+        .ai-highlight:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 45px 90px rgba(66, 233, 245, 0.75);
+        }
+
+        .ai-highlight.top {
+            top: 15%;
+            left: -8%;
+            width: 260px;
+            animation-delay: 0.7s;
+        }
+
+        .ai-highlight.bottom {
+            bottom: 15%;
+            right: -8%;
+            width: 300px;
+            animation-delay: 1s;
+        }
+
+        .ai-highlight h3 {
+            font-size: 4.5rem;
+            color: var(--accent2);
+            margin-bottom: 1.2rem;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(66, 233, 245, 0.7);
+        }
+
+        .ai-highlight p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Sections */
+        section {
+            padding: 15rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 10rem;
+        }
+
+        .section-title h2 {
+            font-size: 6.5rem;
+            margin-bottom: 3.5rem;
+            background: linear-gradient(to right, var(--accent2), var(--accent4), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 30px rgba(66, 233, 245, 0.55);
+        }
+
+        .section-title .divider {
+            height: 8px;
+            width: 300px;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(66, 233, 245, 0.6);
+        }
+
+        /* Courses Section */
+        .courses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 6rem;
+        }
+
+        .course-card {
+            background: var(--glass);
+            border-radius: 45px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 2px solid var(--glass-border);
+            backdrop-filter: blur(30px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            transform: translateY(80px);
+            opacity: 0;
+        }
+
+        .course-card.animated {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            z-index: 1;
+        }
+
+        .course-card:hover {
+            transform: translateY(-35px) rotate(4deg);
+            box-shadow: 0 60px 110px rgba(0, 0, 0, 0.75);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 20px;
+            left: -40px;
+            background: linear-gradient(45deg, var(--accent3), var(--accent));
+            color: var(--primary);
+            padding: 1.5rem 4rem;
+            transform: rotate(-45deg);
+            font-weight: 900;
+            font-size: 1.6rem;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 94, 148, 0.6);
+            z-index: 2;
+        }
+
+        .course-header {
+            padding: 4rem 4rem 3rem;
+            position: relative;
+        }
+
+        .course-icon {
+            font-size: 5rem;
+            color: var(--accent2);
+            margin-bottom: 3.5rem;
+            text-shadow: 0 0 40px rgba(66, 233, 245, 0.8);
+        }
+
+        .course-card h3 {
+            font-size: 3.5rem;
+            margin-bottom: 3rem;
+            font-weight: 900;
+            color: var(--text);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .course-content {
+            padding: 0 4rem 4rem;
+        }
+
+        .course-feature {
+            padding: 3.5rem 0;
+            border-bottom: 2px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .course-feature:last-child {
+            border-bottom: none;
+        }
+
+        .course-feature i {
+            font-size: 2.5rem;
+            color: var(--accent2);
+            min-width: 40px;
+        }
+
+        .course-feature div {
+            flex: 1;
+        }
+
+        .course-feature h4 {
+            color: var(--accent2);
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 800;
+            text-shadow: 0 0 15px rgba(66, 233, 245, 0.35);
+        }
+
+        .course-feature p {
+            font-size: 1.6rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .course-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 4rem;
+            background: rgba(66, 233, 245, 0.1);
+            border-top: 2px solid var(--glass-border);
+        }
+
+        .price-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .original-price {
+            font-size: 2.5rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .discounted-price {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--accent2);
+            text-shadow: 0 0 20px rgba(66, 233, 245, 0.7);
+        }
+
+        .start-date {
+            background: rgba(255, 218, 87, 0.2);
+            color: var(--accent3);
+            padding: 1.5rem 3rem;
+            border-radius: 70px;
+            font-size: 1.8rem;
+            font-weight: 800;
+            border: 2px solid rgba(255, 218, 87, 0.5);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cart-btn {
+            background: linear-gradient(45deg, var(--accent2), var(--accent4));
+            color: var(--primary);
+            border: none;
+            padding: 1.8rem 4rem;
+            border-radius: 70px;
+            font-weight: 900;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(66, 233, 245, 0.6);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .cart-btn:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 30px 70px rgba(66, 233, 245, 0.8);
+        }
+
+        .wishlist-btn {
+            background: transparent;
+            border: 2px solid var(--accent2);
+            color: var(--accent2);
+            border-radius: 70px;
+            padding: 1.8rem;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wishlist-btn:hover {
+            background: rgba(255, 94, 148, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* Shopping Cart */
+        .cart-container {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            padding: 5rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.7);
+            margin: 5rem auto;
+            max-width: 1000px;
+        }
+
+        .cart-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .cart-header h2 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cart-items {
+            border-bottom: 2px solid var(--glass-border);
+            padding-bottom: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 150px;
+            height: 150px;
+            background: rgba(66, 233, 245, 0.2);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--accent2);
+            margin-left: 3rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-item-price {
+            font-size: 2.2rem;
+            color: var(--accent2);
+            font-weight: 800;
+        }
+
+        .cart-item-remove {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .cart-item-remove:hover {
+            color: var(--accent);
+            background: rgba(255, 94, 148, 0.2);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 3rem;
+            font-weight: 800;
+            padding: 3rem 0;
+            margin-bottom: 4rem;
+        }
+
+        .cart-total span:last-child {
+            color: var(--accent2);
+        }
+
+        .checkout-btn {
+            background: linear-gradient(45deg, var(--accent2), var(--accent4));
+            color: var(--primary);
+            border: none;
+            padding: 2.5rem;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 2.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(66, 233, 245, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 70px rgba(66, 233, 245, 0.8);
+        }
+
+        /* Auth Pages */
+        .auth-container {
+            max-width: 600px;
+            margin: 10rem auto;
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            padding: 6rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.7);
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .auth-header h2 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 4rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent2);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 2rem;
+            background: rgba(25, 30, 48, 0.7);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent2);
+            box-shadow: 0 0 20px rgba(66, 233, 245, 0.5);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--accent2), var(--accent4));
+            color: var(--primary);
+            border: none;
+            padding: 2rem;
+            border-radius: 25px;
+            font-weight: 900;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(66, 233, 245, 0.6);
+            margin-top: 3rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 70px rgba(66, 233, 245, 0.8);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 4rem;
+            font-size: 1.8rem;
+        }
+
+        .auth-footer a {
+            color: var(--accent2);
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        /* Dashboard */
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 5rem;
+        }
+
+        .dashboard-sidebar {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            padding: 4rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+            height: fit-content;
+        }
+
+        .dashboard-sidebar h3 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent2);
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .dashboard-menu {
+            list-style: none;
+        }
+
+        .dashboard-menu li {
+            margin-bottom: 2.5rem;
+        }
+
+        .dashboard-menu a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: var(--transition);
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+
+        .dashboard-menu a:hover, .dashboard-menu a.active {
+            background: rgba(66, 233, 245, 0.2);
+            color: var(--accent2);
+        }
+
+        .dashboard-content {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            padding: 4rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5rem;
+            padding-bottom: 3rem;
+            border-bottom: 2px solid var(--glass-border);
+        }
+
+        .dashboard-header h2 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .user-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent2), var(--accent4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+        }
+
+        .user-name {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 4rem;
+        }
+
+        .dashboard-course {
+            background: rgba(25, 30, 48, 0.7);
+            border-radius: 35px;
+            padding: 3rem;
+            transition: var(--transition);
+        }
+
+        .dashboard-course:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 60px rgba(66, 233, 245, 0.4);
+        }
+
+        .course-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .course-progress {
+            background: rgba(66, 233, 245, 0.2);
+            color: var(--accent2);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+        }
+
+        .course-badge {
+            background: rgba(255, 218, 87, 0.2);
+            color: var(--accent3);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1.5rem;
+        }
+
+        .dashboard-course h4 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: rgba(66, 233, 245, 0.2);
+            color: var(--accent2);
+            border: none;
+            padding: 1.5rem;
+            border-radius: 20px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .action-btn:hover {
+            background: var(--accent2);
+            color: var(--primary);
+        }
+
+        /* Admin Panel */
+        .admin-container {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            padding: 5rem;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.7);
+            margin: 5rem auto;
+            max-width: 1200px;
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .admin-header h2 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            border-bottom: 2px solid var(--glass-border);
+            padding-bottom: 2rem;
+        }
+
+        .admin-tab {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 2rem;
+            padding: 1.5rem 3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .admin-tab.active {
+            background: var(--accent2);
+            color: var(--primary);
+        }
+
+        .admin-content {
+            background: rgba(25, 30, 48, 0.5);
+            border-radius: 35px;
+            padding: 4rem;
+        }
+
+        .assignment-form .form-group {
+            margin-bottom: 3rem;
+        }
+
+        .assignment-form textarea {
+            width: 100%;
+            height: 200px;
+            padding: 2rem;
+            background: rgba(25, 30, 48, 0.7);
+            border: 2px solid var(--glass-border);
+            border-radius: 25px;
+            color: var(--text);
+            font-size: 1.8rem;
+            resize: vertical;
+        }
+
+        .submissions-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .submission-card {
+            background: rgba(25, 30, 48, 0.7);
+            border-radius: 35px;
+            padding: 3rem;
+        }
+
+        .submission-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .submission-student {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .submission-date {
+            color: var(--text-secondary);
+        }
+
+        .submission-content {
+            margin-bottom: 3rem;
+        }
+
+        .grade-form {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .grade-input {
+            flex: 1;
+            padding: 1.5rem;
+            background: rgba(25, 30, 48, 0.7);
+            border: 2px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--text);
+            font-size: 1.6rem;
+        }
+
+        .grade-btn {
+            background: var(--accent2);
+            color: var(--primary);
+            border: none;
+            border-radius: 20px;
+            padding: 0 3rem;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 14, 26, 0.98);
+            padding: 10rem 0;
+            text-align: center;
+            border-top: 2px solid var(--glass-border);
+            margin-top: 6rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--accent2), var(--accent));
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 5.5rem;
+            margin-bottom: 6rem;
+        }
+
+        .contact-links a {
+            width: 130px;
+            height: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--text);
+            font-size: 3.8rem;
+            transition: var(--transition);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .contact-links a:hover {
+            background: var(--accent2);
+            color: var(--primary);
+            transform: translateY(-30px) scale(1.2);
+            box-shadow: 0 45px 100px rgba(66, 233, 245, 0.85);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 1.6rem;
+            margin-top: 5rem;
+        }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 26, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 5rem 0;
+        }
+
+        .modal-content {
+            background: var(--glass);
+            border: 2px solid var(--glass-border);
+            border-radius: 45px;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem;
+            position: relative;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 50px 150px rgba(0, 0, 0, 0.7);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 3rem;
+            left: 3rem;
+            font-size: 3rem;
+            color: var(--text);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            transform: rotate(90deg);
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0px rgba(66, 233, 245, 0.6), 0 0 0 0px rgba(155, 93, 229, 0.6);
+            }
+            100% {
+                box-shadow: 0 0 0 250px rgba(66, 233, 245, 0), 0 0 0 500px rgba(155, 93, 229, 0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-60px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes float3D {
+            0% {
+                transform: rotateY(0deg) rotateX(0deg) translateZ(0);
+            }
+            50% {
+                transform: rotateY(25deg) rotateX(15deg) translateZ(50px);
+            }
+            100% {
+                transform: rotateY(-25deg) rotateX(-15deg) translateZ(50px);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(120px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-120px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.1); opacity: 0; }
+            70% { transform: scale(1.25); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Utility Classes */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1800px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 18rem 0 10rem;
+            }
+            
+            .hero-content {
+                margin-bottom: 8rem;
+            }
+            
+            .hero-btns {
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 6rem;
+            }
+            
+            .ai-container {
+                max-width: 700px;
+                height: 700px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 1400px) {
+            .section-title h2 {
+                font-size: 5.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 5.5rem;
+            }
+            
+            .hero p {
+                font-size: 2rem;
+            }
+            
+            .courses-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 3rem;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .stats {
+                flex-wrap: wrap;
+                gap: 3rem;
+            }
+            
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 4.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 4rem;
+            }
+            
+            .course-card, .testimonial {
+                padding: 3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .modal-content {
+                padding: 4rem;
+            }
+
+            .testimonial {
+                min-width: 350px;
+            }
+            
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .user-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <div class="logo">AI-VISION</div>
+                <div class="nav-links">
+                    <a href="#hero">صفحه اصلی</a>
+                    <a href="#courses">دوره‌های آموزشی</a>
+                    <a href="#dashboard" class="dashboard-link hidden">داشبورد</a>
+                    <a href="#admin" class="admin-link hidden">پنل ادمین</a>
+                    <a href="#contact">تماس با من</a>
+                </div>
+                <div class="user-actions">
+                    <a href="#login" class="user-btn login-btn">
+                        <i class="fas fa-sign-in-alt"></i>
+                        ورود
+                    </a>
+                    <a href="#signup" class="user-btn signup-btn">
+                        <i class="fas fa-user-plus"></i>
+                        ثبت نام
+                    </a>
+                    <a href="#dashboard" class="user-btn dashboard-btn hidden">
+                        <i class="fas fa-user"></i>
+                        حساب کاربری
+                    </a>
+                    <a href="#" class="user-btn cart-btn hidden">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h4>متخصص نخبه هوش مصنوعی و فناوری‌های نو</h4>
+                <h1>استاد عرفان غیبی<span>تحول آموزش با تدریس پروژه‌محور</span></h1>
+                <p>ترکیب توانایی‌های شناختی استثنایی و تخصص پیشرفته در هوش مصنوعی و اینترنت اشیاء برای ایجاد راه‌حل‌های انقلابی در دنیای فناوری</p>
+                <div class="hero-btns">
+                    <a href="#courses" class="btn btn-primary">مشاهده دوره‌ها</a>
+                    <a href="#contact" class="btn btn-secondary">مشاوره رایگان</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="ai-container">
+                    <div class="ai-animation">
+                        <i class="fas fa-robot ai-icon"></i>
+                        <div class="ai-highlight top">
+                            <h3>98%</h3>
+                            <p>رضایت دانشجویان</p>
+                        </div>
+                        <div class="ai-highlight bottom">
+                            <h3>پروژه‌محور</h3>
+                            <p>آموزش کاربردی و عملی</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>دوره‌های آموزشی انحصاری</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="courses-container">
+                <div class="course-card">
+                    <div class="discount-badge">۲۰۰,۰۰۰ تومان تخفیف</div>
+                    <div class="course-header">
+                        <div class="course-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>هوش مصنوعی پیشرفته</h3>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-feature">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h4>پروژه‌های واقعی صنعتی</h4>
+                                <p>پیاده‌سازی پروژه‌های واقعی در حوزه‌های پردازش تصویر، NLP و یادگیری عمیق</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>مدت زمان: ۱۲ ساعت</h4>
+                                <p>شامل ۸ ساعت آموزش ویدیویی و ۴ ساعت تمرین عملی</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>پشتیبانی حرفه‌ای</h4>
+                                <p>پشتیبانی ۲۴ ساعته و جلسات رفع اشکال هفتگی</p>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="cart-btn" data-id="1" data-title="هوش مصنوعی پیشرفته" data-price="2990000">
+                                <i class="fas fa-shopping-cart"></i>
+                                افزودن به سبد خرید
+                            </button>
+                            <button class="wishlist-btn">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="course-price">
+                        <div class="price-container">
+                            <span class="original-price">3,490,000 تومان</span>
+                            <span class="discounted-price">2,990,000 تومان</span>
+                        </div>
+                        <div class="start-date">پایان مرداد</div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="discount-badge">۲۰۰,۰۰۰ تومان تخفیف</div>
+                    <div class="course-header">
+                        <div class="course-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>اینترنت اشیاء (IoT)</h3>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-feature">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h4>پیاده‌سازی عملی</h4>
+                                <p>طراحی و پیاده‌سازی سیستم‌های IoT از صفر تا صد</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>مدت زمان: ۱۲ ساعت</h4>
+                                <p>شامل ۸ ساعت آموزش ویدیویی و ۴ ساعت تمرین عملی</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>کیفیت تضمینی</h4>
+                                <p>ضمانت بازگشت وجه در صورت عدم رضایت</p>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="cart-btn" data-id="2" data-title="اینترنت اشیاء (IoT)" data-price="2790000">
+                                <i class="fas fa-shopping-cart"></i>
+                                افزودن به سبد خرید
+                            </button>
+                            <button class="wishlist-btn">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="course-price">
+                        <div class="price-container">
+                            <span class="original-price">3,290,000 تومان</span>
+                            <span class="discounted-price">2,790,000 تومان</span>
+                        </div>
+                        <div class="start-date">پایان مرداد</div>
+                    </div>
+                </div>
+                
+                <div class="course-card">
+                    <div class="discount-badge">۲۰۰,۰۰۰ تومان تخفیف</div>
+                    <div class="course-header">
+                        <div class="course-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>آشنایی با فناوری‌های نوظهور</h3>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-feature">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <h4>بازار کار آینده</h4>
+                                <p>آماده‌سازی برای مشاغل آینده در حوزه‌های داغ فناوری</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>مدت زمان: ۱۲ ساعت</h4>
+                                <p>شامل ۸ ساعت آموزش ویدیویی و ۴ ساعت تمرین عملی</p>
+                            </div>
+                        </div>
+                        <div class="course-feature">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>مدرک بین‌المللی</h4>
+                                <p>اعطای گواهینامه معتبر بین‌المللی پس از پایان دوره</p>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="cart-btn" data-id="3" data-title="آشنایی با فناوری‌های نوظهور" data-price="2490000">
+                                <i class="fas fa-shopping-cart"></i>
+                                افزودن به سبد خرید
+                            </button>
+                            <button class="wishlist-btn">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="course-price">
+                        <div class="price-container">
+                            <span class="original-price">2,990,000 تومان</span>
+                            <span class="discounted-price">2,490,000 تومان</span>
+                        </div>
+                        <div class="start-date">پایان مرداد</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart -->
+    <section id="cart" class="hidden">
+        <div class="container">
+            <div class="cart-container">
+                <div class="cart-header">
+                    <h2>سبد خرید شما</h2>
+                    <p>دوره‌های انتخابی خود را مدیریت کنید</p>
+                </div>
+                <div class="cart-items">
+                    <!-- Cart items will be added dynamically -->
+                </div>
+                <div class="cart-total">
+                    <span>جمع کل:</span>
+                    <span id="cart-total-price">0 تومان</span>
+                </div>
+                <div class="discount-section">
+                    <h4><i class="fas fa-tag"></i> کد تخفیف دارید؟</h4>
+                    <div class="discount-row">
+                        <input type="text" id="discountCode" placeholder="کد تخفیف خود را وارد کنید">
+                        <button onclick="applyDiscount()">اعمال تخفیف</button>
+                    </div>
+                </div>
+                <button class="checkout-btn" onclick="processPayment()">
+                    <i class="fas fa-lock"></i>
+                    پرداخت و تکمیل خرید
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login" class="hidden">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>ورود به حساب کاربری</h2>
+                    <p>لطفا اطلاعات حساب خود را وارد کنید</p>
+                </div>
+                <div class="form-group">
+                    <label for="login-email">ایمیل</label>
+                    <input type="email" id="login-email" placeholder="ایمیل خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">رمز عبور</label>
+                    <input type="password" id="login-password" placeholder="رمز عبور خود را وارد کنید">
+                </div>
+                <button class="submit-btn" onclick="login()">ورود به حساب</button>
+                <div class="auth-footer">
+                    حساب کاربری ندارید؟ <a href="#signup">ثبت نام کنید</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup Page -->
+    <section id="signup" class="hidden">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h2>ایجاد حساب کاربری</h2>
+                    <p>لطفا اطلاعات خود را وارد کنید</p>
+                </div>
+                <div class="form-group">
+                    <label for="signup-name">نام کامل</label>
+                    <input type="text" id="signup-name" placeholder="نام و نام خانوادگی خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">ایمیل</label>
+                    <input type="email" id="signup-email" placeholder="ایمیل خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone">شماره تماس</label>
+                    <input type="tel" id="signup-phone" placeholder="شماره تماس خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">رمز عبور</label>
+                    <input type="password" id="signup-password" placeholder="رمز عبور خود را وارد کنید">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm">تکرار رمز عبور</label>
+                    <input type="password" id="signup-confirm" placeholder="رمز عبور خود را مجددا وارد کنید">
+                </div>
+                <button class="submit-btn" onclick="signup()">ثبت نام</button>
+                <div class="auth-footer">
+                    قبلا حساب کاربری دارید؟ <a href="#login">وارد شوید</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Dashboard -->
+    <section id="dashboard" class="hidden">
+        <div class="container">
+            <div class="dashboard-container">
+                <div class="dashboard-sidebar">
+                    <h3>منوی کاربری</h3>
+                    <ul class="dashboard-menu">
+                        <li><a href="#dashboard" class="active"><i class="fas fa-home"></i> داشبورد</a></li>
+                        <li><a href="#dashboard-courses"><i class="fas fa-book"></i> دوره‌های من</a></li>
+                        <li><a href="#dashboard-certificates"><i class="fas fa-certificate"></i> گواهینامه‌ها</a></li>
+                        <li><a href="#dashboard-assignments"><i class="fas fa-tasks"></i> تکالیف و تمرین‌ها</a></li>
+                        <li><a href="#dashboard-settings"><i class="fas fa-cog"></i> تنظیمات حساب</a></li>
+                        <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> خروج</a></li>
+                    </ul>
+                </div>
+                <div class="dashboard-content">
+                    <div class="dashboard-header">
+                        <h2>داشبورد کاربری</h2>
+                        <div class="user-info">
+                            <div class="user-avatar">ع</div>
+                            <div class="user-name">عرفان غیبی</div>
+                        </div>
+                    </div>
+                    <div class="courses-grid">
+                        <div class="dashboard-course">
+                            <div class="course-status">
+                                <div class="course-progress">در حال برگزاری</div>
+                                <div class="course-badge">12 ساعت</div>
+                            </div>
+                            <h4>هوش مصنوعی پیشرفته</h4>
+                            <p>پیاده‌سازی پروژه‌های واقعی در حوزه‌های پردازش تصویر، NLP و یادگیری عمیق</p>
+                            <div class="course-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-play"></i>
+                                    ادامه یادگیری
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-download"></i>
+                                    منابع
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dashboard-course">
+                            <div class="course-status">
+                                <div class="course-progress">تکمیل شده</div>
+                                <div class="course-badge">12 ساعت</div>
+                            </div>
+                            <h4>اینترنت اشیاء (IoT)</h4>
+                            <p>طراحی و پیاده‌سازی سیستم‌های IoT از صفر تا صد</p>
+                            <div class="course-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-certificate"></i>
+                                    دریافت گواهینامه
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-redo"></i>
+                                    مرور دوره
+                                </button>
+                            </div>
+                        </div>
+                        <div class="dashboard-course">
+                            <div class="course-status">
+                                <div class="course-progress">در حال برگزاری</div>
+                                <div class="course-badge">12 ساعت</div>
+                            </div>
+                            <h4>آشنایی با فناوری‌های نوظهور</h4>
+                            <p>آماده‌سازی برای مشاغل آینده در حوزه‌های داغ فناوری</p>
+                            <div class="course-actions">
+                                <button class="action-btn">
+                                    <i class="fas fa-play"></i>
+                                    ادامه یادگیری
+                                </button>
+                                <button class="action-btn">
+                                    <i class="fas fa-download"></i>
+                                    منابع
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Panel -->
+    <section id="admin" class="hidden">
+        <div class="container">
+            <div class="admin-container">
+                <div class="admin-header">
+                    <h2>پنل مدیریت ادمین</h2>
+                    <p>مدیریت دوره‌ها، کاربران و تکالیف</p>
+                </div>
+                <div class="admin-tabs">
+                    <button class="admin-tab active">مدیریت دوره‌ها</button>
+                    <button class="admin-tab">تکالیف</button>
+                    <button class="admin-tab">ارسال تمرین جدید</button>
+                    <button class="admin-tab">مشاهده پاسخ‌ها</button>
+                </div>
+                <div class="admin-content">
+                    <form class="assignment-form">
+                        <div class="form-group">
+                            <label for="assignment-title">عنوان تمرین</label>
+                            <input type="text" id="assignment-title" placeholder="عنوان تمرین را وارد کنید">
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-course">انتخاب دوره</label>
+                            <select id="assignment-course" class="form-group input">
+                                <option value="1">هوش مصنوعی پیشرفته</option>
+                                <option value="2">اینترنت اشیاء (IoT)</option>
+                                <option value="3">آشنایی با فناوری‌های نوظهور</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-desc">توضیحات تمرین</label>
+                            <textarea id="assignment-desc" placeholder="توضیحات کامل تمرین را وارد کنید"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-due">مهلت تحویل</label>
+                            <input type="date" id="assignment-due">
+                        </div>
+                        <button type="button" class="submit-btn">ارسال تمرین</button>
+                    </form>
+                    <div class="submissions-list">
+                        <div class="submission-card">
+                            <div class="submission-header">
+                                <div class="submission-student">محمد رضایی</div>
+                                <div class="submission-date">۱۴۰۳/۰۵/۲۰</div>
+                            </div>
+                            <div class="submission-content">
+                                <p>پاسخ تمرین در فایل ضمیمه ارسال شده است. لطفا بررسی فرمایید.</p>
+                            </div>
+                            <div class="grade-form">
+                                <input type="number" class="grade-input" placeholder="نمره (از ۲۰)">
+                                <button class="grade-btn">ثبت نمره</button>
+                            </div>
+                        </div>
+                        <div class="submission-card">
+                            <div class="submission-header">
+                                <div class="submission-student">سارا محمدی</div>
+                                <div class="submission-date">۱۴۰۳/۰۵/۱۹</div>
+                            </div>
+                            <div class="submission-content">
+                                <p>تمرین مربوط به جلسه سوم را به صورت کامل انجام دادم و در قالب PDF ارسال کردم.</p>
+                            </div>
+                            <div class="grade-form">
+                                <input type="number" class="grade-input" placeholder="نمره (از ۲۰)" value="18">
+                                <button class="grade-btn">ثبت نمره</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>ارتباط با من</h2>
+                <div class="divider"></div>
+            </div>
+            
+            <div class="contact-links">
+                <a href="mailto:saedevadieee@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">تمامی حقوق برای آکادمی هوش مصنوعی و فناوری‌های نو محفوظ است. © ۲۰۲۵</p>
+        </div>
+    </footer>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 180, density: { enable: true, value_area: 1500 } },
+                color: { value: "#42e9f5" },
+                shape: { type: "circle" },
+                opacity: { value: 0.9, random: true },
+                size: { value: 6, random: true },
+                line_linked: {
+                    enable: true,
+                    distance: 220,
+                    color: "#ff5e94",
+                    opacity: 0.6,
+                    width: 2.5
+                },
+                move: {
+                    enable: true,
+                    speed: 5,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 200, duration: 0.7 },
+                    push: { particles_nb: 10 }
+                }
+            },
+            retina_detect: true
+        });
+        
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.course-card');
+            const header = document.getElementById('header');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animated');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            cards.forEach(card => observer.observe(card));
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    // Hide all pages
+                    document.querySelectorAll('section').forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    
+                    // Show target page
+                    if(targetId === '#hero') {
+                        document.getElementById('hero').classList.remove('hidden');
+                    } else {
+                        document.querySelector(targetId).classList.remove('hidden');
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+            
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Add to cart functionality
+            document.querySelectorAll('.cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const title = this.getAttribute('data-title');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    
+                    addToCart(id, title, price);
+                    updateCartCount();
+                    
+                    // Show success message
+                    alert(`"${title}" به سبد خرید اضافه شد!`);
+                });
+            });
+            
+            // Initialize cart
+            initCart();
+            checkLoginStatus();
+        });
+        
+        // Cart functionality
+        let cart = [];
+        
+        function initCart() {
+            const savedCart = localStorage.getItem('cart');
+            if(savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartCount();
+                renderCart();
+            }
+        }
+        
+        function addToCart(id, title, price) {
+            // Check if already in cart
+            const existingItem = cart.find(item => item.id === id);
+            
+            if(!existingItem) {
+                cart.push({
+                    id: id,
+                    title: title,
+                    price: price,
+                    quantity: 1
+                });
+                
+                saveCart();
+                renderCart();
+            }
+        }
+        
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            saveCart();
+            renderCart();
+            updateCartCount();
+        }
+        
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+        
+        function updateCartCount() {
+            document.querySelector('.cart-count').textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        }
+        
+        function renderCart() {
+            const cartItems = document.querySelector('.cart-items');
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-img">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.title}</div>
+                        <div class="cart-item-price">${item.price.toLocaleString('fa-IR')} تومان</div>
+                    </div>
+                    <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            document.getElementById('cart-total-price').textContent = total.toLocaleString('fa-IR') + ' تومان';
+        }
+        
+        function applyDiscount() {
+            const discountCode = document.getElementById('discountCode').value.toUpperCase();
+            let discount = 0;
+            
+            if(discountCode === 'BE HAPPY DAD' || discountCode === 'BE HAPPY MOM') {
+                discount = 200000;
+                alert(`کد تخفیف "${discountCode}" با موفقیت اعمال شد! ۲۰۰,۰۰۰ تومان تخفیف اعمال گردید.`);
+            } else {
+                alert('کد تخفیف نامعتبر است! لطفاً کدهای BE HAPPY DAD یا BE HAPPY MOM را وارد کنید.');
+                return;
+            }
+            
+            const totalElement = document.getElementById('cart-total-price');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const discountedTotal = total - discount;
+            
+            totalElement.textContent = discountedTotal.toLocaleString('fa-IR') + ' تومان';
+            totalElement.innerHTML += `<div style="font-size: 1.8rem; color: #ffda57;">(تخفیف: ${discount.toLocaleString('fa-IR')} تومان)</div>`;
+        }
+        
+        function processPayment() {
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if(total === 0) {
+                alert('سبد خرید شما خالی است!');
+                return;
+            }
+            
+            // Get user info
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if(!currentUser) {
+                alert('لطفاً ابتدا وارد حساب کاربری خود شوید!');
+                document.querySelector('.login-btn').click();
+                return;
+            }
+            
+            // In a real application, this would connect to a payment gateway
+            alert(`پرداخت با موفقیت انجام شد!\nمبلغ پرداختی: ${total.toLocaleString('fa-IR')} تومان\nلینک دسترسی به دوره‌ها به ایمیل ${currentUser.email} ارسال خواهد شد.`);
+            
+            // Send email notification to admin
+            const adminEmail = "saedevadieee@gmail.com";
+            const emailContent = `
+                خرید جدید در سایت:
+                کاربر: ${currentUser.name}
+                ایمیل: ${currentUser.email}
+                شماره تماس: ${currentUser.phone}
+                مبلغ پرداختی: ${total.toLocaleString('fa-IR')} تومان
+                دوره‌ها: 
+                ${cart.map(item => `- ${item.title}`).join('\n')}
+            `;
+            
+            console.log(`ایمیل به آدرس ${adminEmail} ارسال شد:\n${emailContent}`);
+            
+            // Clear cart
+            cart = [];
+            saveCart();
+            renderCart();
+            updateCartCount();
+        }
+        
+        // Authentication
+        function signup() {
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const phone = document.getElementById('signup-phone').value;
+            const password = document.getElementById('signup-password').value;
+            const confirm = document.getElementById('signup-confirm').value;
+            
+            if(!name || !email || !phone || !password || !confirm) {
+                alert('لطفاً تمام فیلدها را پر کنید!');
+                return;
+            }
+            
+            if(password !== confirm) {
+                alert('رمز عبور و تکرار آن مطابقت ندارند!');
+                return;
+            }
+            
+            // Save user to localStorage
+            const user = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                isAdmin: email === "admin@example.com" // For demo purposes
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            
+            // Send welcome email
+            sendEmail(email, "خوش آمدید به آکادمی هوش مصنوعی", `سلام ${name}، ثبت نام شما با موفقیت انجام شد!`);
+            
+            alert('ثبت نام شما با موفقیت انجام شد! اکنون می‌توانید وارد حساب کاربری خود شوید.');
+            checkLoginStatus();
+            document.querySelector('.login-btn').click();
+        }
+        
+        function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            // For demo purposes
+            if(email === "admin@example.com" && password === "admin") {
+                const adminUser = {
+                    name: "ادمین",
+                    email: "admin@example.com",
+                    isAdmin: true
+                };
+                
+                localStorage.setItem('currentUser', JSON.stringify(adminUser));
+                checkLoginStatus();
+                alert('ورود به پنل ادمین موفقیت آمیز بود!');
+                return;
+            }
+            
+            // In a real app, this would validate against stored users
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if(!currentUser || currentUser.email !== email || currentUser.password !== password) {
+                alert('ایمیل یا رمز عبور اشتباه است!');
+                return;
+            }
+            
+            checkLoginStatus();
+            alert(`خوش آمدید ${currentUser.name}!`);
+            document.getElementById('dashboard').classList.remove('hidden');
+        }
+        
+        function logout() {
+            localStorage.removeItem('currentUser');
+            checkLoginStatus();
+            alert('با موفقیت از حساب کاربری خارج شدید!');
+            document.getElementById('hero').classList.remove('hidden');
+        }
+        
+        function checkLoginStatus() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const loginBtn = document.querySelector('.login-btn');
+            const signupBtn = document.querySelector('.signup-btn');
+            const dashboardBtn = document.querySelector('.dashboard-btn');
+            const adminLink = document.querySelector('.admin-link');
+            const dashboardLink = document.querySelector('.dashboard-link');
+            const cartBtn = document.querySelector('.cart-btn');
+            
+            if(currentUser) {
+                loginBtn.classList.add('hidden');
+                signupBtn.classList.add('hidden');
+                dashboardBtn.classList.remove('hidden');
+                cartBtn.classList.remove('hidden');
+                
+                if(currentUser.isAdmin) {
+                    adminLink.classList.remove('hidden');
+                    dashboardLink.classList.remove('hidden');
+                }
+            } else {
+                loginBtn.classList.remove('hidden');
+                signupBtn.classList.remove('hidden');
+                dashboardBtn.classList.add('hidden');
+                cartBtn.classList.add('hidden');
+                adminLink.classList.add('hidden');
+                dashboardLink.classList.add('hidden');
+            }
+        }
+        
+        function sendEmail(to, subject, body) {
+            // In a real application, this would send an actual email
+            console.log(`ایمیل ارسال شده به: ${to}`);
+            console.log(`موضوع: ${subject}`);
+            console.log(`متن ایمیل:\n${body}`);
+            
+            // For demo, we'll store in localStorage
+            const emails = JSON.parse(localStorage.getItem('emails')) || [];
+            emails.push({ to, subject, body, date: new Date() });
+            localStorage.setItem('emails', JSON.stringify(emails));
+        }
+    </script>
+</body>
+</html>
